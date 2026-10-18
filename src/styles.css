@@ -1,0 +1,12 @@
+.tau-upload-settings {
+  display: grid;
+  gap: 12px;
+  color: var(--tau-ink-1);
+}
+.tau-upload-settings label {
+  display: grid;
+  gap: 6px;
+}
+.tau-upload-settings p {
+  color: var(--tau-ink-2);
+}
