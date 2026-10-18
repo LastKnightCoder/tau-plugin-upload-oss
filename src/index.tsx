@@ -73,7 +73,13 @@ export default definePlugin({
       context.upload.register({
         id: context.pluginId,
         name: __PLUGIN_META__.name,
-        upload: (file, config) => upload(context.fetch, file, config),
+        upload: (file, config, signal?: AbortSignal) => upload((input, init) => {
+          const sourceSignal = init?.signal ?? (input instanceof Request ? input.signal : undefined);
+          return context.fetch(input, {
+            ...init,
+            signal: AbortSignal.any([context.signal, ...(signal ? [signal] : []), ...(sourceSignal ? [sourceSignal] : [])]),
+          });
+        }, file, config),
       });
       context.settings.register({
         id: "upload",
