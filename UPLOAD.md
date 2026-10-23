@@ -22,7 +22,7 @@ context.settings.register({
 });
 ```
 
-UploadSettings 接收 PluginSettingsProps。读取 uploadConfig.value，在用户保存时调用 await uploadConfig.save(config)，宿主保存并选中该提供方；不要将同一份上传配置再存到 context.storage。配置是 JsonValue，读取时自行校验字段并给出错误提示。组件在资源存储设置页显示；插件详情页提供跳转入口。
+UploadSettings 接收 PluginSettingsProps。读取 uploadConfig.value，在用户保存时调用 await uploadConfig.save(config)，宿主按当前交互保存配置并管理选用状态；不要将同一份上传配置再存到 context.storage。配置是 JsonValue，读取时自行校验字段并给出错误提示。组件在资源存储设置页显示；插件详情页提供跳转入口。
 
 每个插件只能注册一个上传提供方，id 必须等于 context.pluginId。宿主负责压缩、文件唯一命名、本地保存和跨窗口转发。插件只负责远端上传和返回资源地址，不读取用户文件路径，也不修改笔记内容。
 

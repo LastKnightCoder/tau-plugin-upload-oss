@@ -1,5 +1,6 @@
+import { MobileSettings } from "./mobile-settings";
 import { useState } from "react";
-import { definePlugin, type PluginSettingsProps } from "@tau/plugins";
+import { definePlugin, usePluginEnvironment, type PluginSettingsProps } from "@tau/plugins";
 import { Button, Input, SettingRow } from "@tau/ui";
 import { upload, validate } from "./upload";
 
@@ -33,17 +34,19 @@ function Settings({ uploadConfig, context }: PluginSettingsProps) {
     setMessage("");
     setSaving(true);
     try {
-      const validation = await validate(form);
-      if (!validation.ok) {
-        setMessage(validation.error);
-        return;
-      }
+      validate(form);
       context.signal.throwIfAborted();
-      await uploadConfig.save(form);
+      await uploadConfig.save({
+        ...(uploadConfig.value &&
+        typeof uploadConfig.value === "object" &&
+        !Array.isArray(uploadConfig.value)
+          ? uploadConfig.value
+          : {}),
+        ...form,
+      });
       if (!context.signal.aborted) setMessage("已保存并启用");
     } catch (error) {
-      if (!context.signal.aborted)
-        setMessage(error instanceof Error ? error.message : "保存失败");
+      if (!context.signal.aborted) setMessage(error instanceof Error ? error.message : "保存失败");
     } finally {
       if (!context.signal.aborted) setSaving(false);
     }
@@ -84,6 +87,15 @@ function Settings({ uploadConfig, context }: PluginSettingsProps) {
   );
 }
 
+function SettingsView(props: PluginSettingsProps) {
+  const environment = usePluginEnvironment();
+  return environment.platform === "desktop" ? (
+    <Settings {...props} />
+  ) : (
+    <MobileSettings {...props} />
+  );
+}
+
 export default definePlugin({
   ...__PLUGIN_META__,
   create: () => ({
@@ -113,7 +125,7 @@ export default definePlugin({
         id: "upload",
         title: __PLUGIN_META__.name,
         target: "upload",
-        component: Settings,
+        component: SettingsView,
       });
     },
   }),
