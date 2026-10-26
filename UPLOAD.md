@@ -18,11 +18,16 @@ context.settings.register({
   id: "upload",
   title: "我的资源存储",
   target: "upload",
-  component: UploadSettings,
+  form: {
+    groups: [
+      { title: "账号", fields: [{ key: "token", label: "访问令牌", type: "secret" }] },
+      { title: "存储位置", fields: [{ key: "bucket", label: "Bucket", type: "text", summary: true }] },
+    ],
+  },
 });
 ```
 
-UploadSettings 接收 PluginSettingsProps。读取 uploadConfig.value，在用户保存时调用 await uploadConfig.save(config)，宿主按当前交互保存配置并管理选用状态；不要将同一份上传配置再存到 context.storage。配置是 JsonValue，读取时自行校验字段并给出错误提示。组件在资源存储设置页显示；插件详情页提供跳转入口。
+form 只声明字段：客户端在插件详情 › 设置里按平台渲染，负责显式保存、必填校验与选用，“设置→资源存储”只列出各服务的摘要与状态；保存不改变当前选用。不要将同一份上传配置再存到 context.storage。需要校验地址格式等时实现 form.beforeSave(values, signal) 并抛出可读错误。
 
 每个插件只能注册一个上传提供方，id 必须等于 context.pluginId。宿主负责压缩、文件唯一命名、本地保存和跨窗口转发。插件只负责远端上传和返回资源地址，不读取用户文件路径，也不修改笔记内容。
 
