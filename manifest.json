@@ -4,7 +4,7 @@
   "description": "将图片与附件上传到阿里云 OSS并返回可引用的资源地址。",
   "categories": ["upload"],
   "keywords": ["阿里云", "OSS", "图床"],
-  "version": "0.3.3",
+  "version": "0.3.4",
   "targets": {
     "desktop": {
       "minAppVersion": "0.60.2"
