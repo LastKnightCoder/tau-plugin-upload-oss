@@ -12,7 +12,7 @@ const file = {
   mimeType: "image/png",
   content: new Uint8Array([0, 255]),
 };
-it("实际浏览器SDK签名并经宿主传输，不写入私有ACL", async () => {
+it("实际浏览器SDK使用V4签名并经宿主传输，不写入私有ACL", async () => {
   const fetch = vi
     .fn<typeof globalThis.fetch>()
     .mockResolvedValue(new Response("", { status: 200 }));
@@ -23,7 +23,10 @@ it("实际浏览器SDK签名并经宿主传输，不写入私有ACL", async () =
   expect(fetch).toHaveBeenCalledTimes(1);
   const request = fetch.mock.calls[0][1]!;
   const headers = new Headers(request.headers);
-  expect(headers.get("authorization")).toContain("OSS test-only:");
+  expect(headers.get("authorization")).toMatch(
+    /^OSS4-HMAC-SHA256 Credential=test-only\/\d{8}\/cn-hangzhou\/oss\/aliyun_v4_request,Signature=[a-f0-9]{64}$/,
+  );
+  expect(headers.get("x-oss-content-sha256")).toBe("UNSIGNED-PAYLOAD");
   expect(headers.get("content-type")).toBe("image/png");
   expect(headers.has("x-oss-object-acl")).toBe(false);
   expect(

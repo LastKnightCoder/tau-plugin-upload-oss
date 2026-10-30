@@ -18,6 +18,7 @@ export async function upload(
       accessKeySecret: config.accessKeySecret,
       bucket: config.bucket,
       region: config.region,
+      authorizationV4: true,
       secure: true,
       urllib: createTransport(fetch),
     };
