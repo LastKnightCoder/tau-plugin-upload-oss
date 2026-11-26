@@ -1,0 +1,13 @@
+{
+  "account.title": "账号",
+  "account.description": "在阿里云控制台的 AccessKey 管理中获取",
+  "account.accessKey": "AccessKey ID",
+  "account.secret": "AccessKey Secret",
+  "location.title": "存储位置",
+  "location.publicHint": "返回的资源地址须能公开访问；插件不会修改存储桶权限",
+  "location.bucket": "Bucket",
+  "location.region": "区域",
+  "location.path": "目录",
+  "location.publicBase": "公开地址前缀",
+  "location.publicBaseHint": "使用自定义域名或 CDN 时填写"
+}

@@ -1,0 +1,13 @@
+{
+  "account.title": "Account",
+  "account.description": "Get these from AccessKey Management in the Alibaba Cloud console",
+  "account.accessKey": "AccessKey ID",
+  "account.secret": "AccessKey Secret",
+  "location.title": "Storage location",
+  "location.publicHint": "Returned resource URLs must be publicly accessible. The plugin does not change bucket permissions.",
+  "location.bucket": "Bucket",
+  "location.region": "Region",
+  "location.path": "Directory",
+  "location.publicBase": "Public URL prefix",
+  "location.publicBaseHint": "For a custom domain or CDN"
+}

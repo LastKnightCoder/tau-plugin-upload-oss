@@ -1,0 +1,13 @@
+{
+  "account.title": "帳號",
+  "account.description": "在阿里雲控制台的 AccessKey 管理中取得",
+  "account.accessKey": "AccessKey ID",
+  "account.secret": "AccessKey Secret",
+  "location.title": "儲存位置",
+  "location.publicHint": "回傳的資源網址須可公開存取；外掛不會修改儲存貯體權限",
+  "location.bucket": "Bucket",
+  "location.region": "區域",
+  "location.path": "目錄",
+  "location.publicBase": "公開網址前綴",
+  "location.publicBaseHint": "使用自訂網域或 CDN 時填寫"
+}
