@@ -4,16 +4,29 @@
   "description": "将图片与附件上传到阿里云 OSS并返回可引用的资源地址。",
   "categories": ["upload"],
   "keywords": ["阿里云", "OSS", "图床"],
-  "version": "0.3.5",
+  "locales": ["zh-CN", "zh-TW", "en-US"],
+  "i18n": {
+    "zh-TW": {
+      "name": "阿里雲 OSS 資源上傳",
+      "description": "將圖片與附件上傳到阿里雲 OSS 並回傳可引用的資源網址。",
+      "keywords": ["阿里雲", "OSS", "圖床"]
+    },
+    "en-US": {
+      "name": "Alibaba Cloud OSS Asset Upload",
+      "description": "Upload images and attachments to Alibaba Cloud OSS and return usable asset URLs.",
+      "keywords": ["Alibaba Cloud", "OSS", "image hosting", "upload"]
+    }
+  },
+  "version": "0.3.6",
   "targets": {
     "desktop": {
-      "minAppVersion": "0.60.2"
+      "minAppVersion": "0.68.0"
     },
     "android": {
-      "minAppVersion": "0.2.9"
+      "minAppVersion": "0.6.0"
     },
     "ios": {
-      "minAppVersion": "0.2.9"
+      "minAppVersion": "0.6.0"
     }
   }
 }
